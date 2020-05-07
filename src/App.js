@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import SearchForm from './SearchForm';
+import BookList from './BookList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: []
+    }
+  }
+
+  setBooks(books) {
+    console.log("Set books was called", books)
+    this.setState({
+      books: books
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <main>
+          <section id="search_form">
+            <SearchForm setBooks={books => this.setBooks(books)} />
+            <BookList books={this.state.books}/>
+          </section>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
